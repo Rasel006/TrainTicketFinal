@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    input[type="text"] {
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="email"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+  </style>
+
+
+<h1 class="text-3xl text-center font-bold mt-10">Edit Profile</h1>
+<div class="flex">
+    
+    <div class="mx-auto">
+        <form
+  method="post"
+  class="mx-auto mt-5 mb-12 bg-gray-100 shadow-md rounded-lg px-8 pt-8 pb-8 mb-4"
+>
+  {% csrf_token %}
+  
+  <div class="flex justify-between mb-5">
+    <div class="w-1/2 mr-2">
+      <label
+        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        for="{{ form.first_name.id_for_label }}"
+        >{{form.first_name.label}}</label
+      >
+      {{form.first_name}}
+    </div>
+    <div class="w-1/2">
+      <label
+        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        for="{{ form.last_name.id_for_label }}"
+        >{{form.last_name.label}}</label
+      >
+      {{form.last_name}}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label
+    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+    for="{{ form.username.id_for_label }}"
+    >{{form.username.label}}</label
+  >
+  {{form.username}}
+  </div>
+  <div>
+    <label
+    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+    for="{{ form.email.id_for_label }}"
+    >{{form.email.label}}</label
+  >
+  {{form.email}}
+  </div>
+  <div>
+    <label
+    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+    for="{{ form.password.id_for_label }}"
+    >{{form.password.label}}</label
+  >
+  {{form.password}}
+  </div>
+  <div class="mt-5 text-center">
+    <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" type="submit">
+      Update Info
+    </button>
+    
+  </div>
+    </div>
+</div>
+
+  
+</form>
+
+{% endblock content %}

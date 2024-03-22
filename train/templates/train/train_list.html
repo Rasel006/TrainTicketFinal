@@ -1,0 +1,47 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h1 class="text-4xl justify-center font-bold mt-10 flex items-center"><div class="w-1 h-6 mr-2 bg-blue-800"></div> Train Information</h1>
+
+<div class="mx-24 my-12">
+  {% for train in trains %}
+  <div class="mx-auto bg-gray-400 rounded-lg">
+    <div class="rounded-lg">
+      <div class="px-6 mt-3">
+        <h5 class="text-xl font-bold">{{train.name }}</h5>
+        <p class="italic">{{ train.time }}</p>
+      </div>
+      <div class="flex justify-between items-center py-3 px-6">
+        <p class="text-xl">
+            Departure: 
+            {% for cat in train.station.all %}    
+              {{ cat.name }}
+            {% endfor %}
+        </p>
+        <p class="text-xl">Destination: {{ train.destination }}</p>
+      </div>
+      <div class="flex justify-between p-8">
+      {% if request.user.is_staff %}
+        <a href="{% url 'edit_train' train.id %}">
+          <button class="bg-green-600 rounded-lg w-56 py-3 text-white font-extrabold" >
+            Edit 
+          </button>
+        </a>
+        <a href="{% url 'delete_train' train.id %}">
+          <button class="bg-red-600 rounded-lg w-56 py-3 text-white font-extrabold" >
+          Delete
+        </button>
+        </a>
+        {% endif %}
+        <a href="{% url 'details_train' train.id %}">
+          <button class="bg-green-600 rounded-lg w-56 py-3 text-white font-extrabold" >
+          Details
+        </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

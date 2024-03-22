@@ -1,0 +1,155 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+{% load static %}
+<div class="swiffy-slider slider-nav-visible slider-nav-animation slider-nav-animation-slow slider-item-first-visible" id="animatedText">
+    <ul class="slider-container" id="container1">
+        <li id="slide1" class="slide-visible">
+            <div>
+                <img src ="{% static './img/background5.jpeg' %}" alt="..." loading="lazy" class="w-100">
+                <h1 class="display-1 text-4xl text-green custom-animated-text position-absolute top-50 start-50 translate-middle">Brrailway Ticket Booking System</h1>
+            </div>
+        </li>
+      
+    </ul>
+    <button type="button" class="slider-nav" aria-label="Go to previous"></button>
+    <button type="button" class="slider-nav slider-nav-next" aria-label="Go to next"></button>
+    <div class="slider-indicators">
+        <button aria-label="Go to slide" class="active"></button>
+        <button aria-label="Go to slide"></button>
+    </div>
+    <style>
+        #animatedText.slider-nav-animation .slider-container div {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 65, 107, 0.43), rgba(0, 65, 107, 0.43));
+        }
+    
+        #animatedText.slider-nav-animation .slider-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        #animatedText.slider-nav-animation .slider-container .custom-animated-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out, transform .95s ease-in-out;
+            transition-delay: .5s;
+            text-align: center;
+            color: white;
+        }
+    
+        #animatedText.slider-nav-animation .slider-container .slide-visible .custom-animated-text {
+            opacity: 1;
+            transform: none;
+        }
+    </style>    
+</div>
+
+
+<div class="flex items-center justify-center mx-auto my-3 rounded-lg">
+  <div class="flex items-center m-4">
+    <a class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" href="{% url 'home' %}"
+      >All Station</a
+    >
+    {% for i in station %}
+    <a
+      class="bg-green-600 text-white mx-2 px-3 py-2 rounded-lg"
+      href="{% url 'station_wise' i.slug %}"
+      >{{i.name}}</a
+    >
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- category end -->
+
+{% if trains %}
+<div class="mx-24 my-12">
+    <div class="w-1/10 flex justify-center items-center py-5">
+        <img src="https://yearlynews.com/wp-content/uploads/2021/07/Dhaka-to-Tangail-Train-780x470.png" class="max-w-full" style="max-width: 400px;" alt="Train Image">
+      </div>
+  {% for train in trains %}
+  <div class="mx-auto bg-gray-200 rounded-lg">
+    <div class="rounded-lg">
+      <div class="px-2 mt-5 pt-5">
+        <h5 class="text-xl font-bold">{{train.name }}</h5>
+        <p class="italic">{{ train.time }}</p>
+      </div>
+      <div class="flex justify-between items-center py-3 px-6">
+        <p class="text-xl">
+            Departure: 
+            {% for cat in train.station.all %}    
+              {{ cat.name }}
+            {% endfor %}
+        </p>
+        <p class="text-xl">Destination: {{ train.destination }}</p>
+        <p>
+          <a href="{% url 'details_train' train.id %}">
+            <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" >
+            Details
+          </button>
+          </a>
+        </p>
+      </div>
+      {% if request.user.is_staff %}
+      <div class="flex justify-between p-8">
+        <a href="{% url 'edit_train' train.id %}">
+          <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" >
+            Edit 
+          </button>
+        </a>
+        <a href="{% url 'delete_train' train.id %}">
+          <button class="bg-red-600 rounded-lg w-56 py-3 text-white font-extrabold" >
+          Delete
+        </button>
+        </a>
+      </div>
+        {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="text-3xl font-bold my-12 text-center text-red-600">Sorry, No Trains is Departuring From this Station</p>
+
+{% endif %}
+
+<div class="flex justify-between mx-24"> 
+  <div class="w-1/3 p-12">
+    <img class="w-36" src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?w=740&t=st=1710178742~exp=1710179342~hmac=a3caa86974df0d5108c0d60c97ab30e0fc0eb1fe2067caf2ad2441cfe9e14a2b" alt="">
+    <h1 class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Search</h1>
+    <p>Select your origin, destination, and journey dates, then search for available trains</p>
+  </div>
+  <div class="w-1/3 p-12">
+    <img src="https://img.freepik.com/premium-vector/isometric-style-illustration-about-register-get-profile-website_529804-637.jpg?w=740" alt="">
+    <h1 class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Select</h1>
+    <p>Choose your desired trip and select your preferences to embark on a unique journey</p>
+  </div>
+  <div class="w-1/3 p-12">
+    <img src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7893.jpg?w=740&t=st=1710178994~exp=1710179594~hmac=d99b13e4e9550cb0a2700d17eb0d391bcedc992fa5c4f97b616b560de1174487" alt="">
+    <h1 class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Pay</h1>
+    <p>Securely complete your transaction by paying for tickets using your preferred debit or credit card, as well as popular mobile financial services such as Bkash, Rocket, and Nogod</p>
+  </div>
+</div>
+
+<div class="flex justify-between items-center mx-12 my-12">
+  <div class="w-1/2 ">
+    <img class="mx-auto" src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7895.jpg?w=740&t=st=1710184878~exp=1710185478~hmac=7a68552ac3598b72ed03b80b475e64b1722f6945d1a6f46debb8796cac98fa12" alt="">
+  </div>
+  <div class="w-1/2">
+    <h1 class="text-3xl font-bold text-[#5AE4A8]">Secure your tickets swiftly with our streamlined purchasing process</h1>
+    <ul class="mt-6">
+      <li class="my-3 text-xl"><span class="font-bold text-2xl"></span> Select Departure first</li>
+      <li class="my-3 text-xl"><span class="font-bold text-2xl"></span> Login To See Details</li>
+      <li class="my-3 text-xl"><span class="font-bold text-2xl"></span> Then Select Seat and click Book Now</li>
+      <li class="my-3 text-xl"><span class="font-bold text-2xl"></span> See your Dashboard and See booked Ticket</li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

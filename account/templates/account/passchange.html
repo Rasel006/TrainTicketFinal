@@ -1,0 +1,31 @@
+{% extends 'base.html'%} 
+{% block body %}
+
+<style>
+    input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+  </style>
+
+<form method="post" class="mb-6" style="width: 50%; margin: auto" novalidate>
+  <h1 class="text-3xl my-12">Change Password</h1>
+  {% csrf_token %} 
+  {% if form.non_field_errors %}
+   {% for er in form.non_field_errors %}
+  <p class="bg-danger text-white p-3">{{er}}</p>
+  {% endfor %} 
+  {% endif %}
+  {% for fm in form%} 
+  {{fm.label_tag}} {{fm}}
+  <p class="text-danger">{{fm.errors|striptags}}</p>
+  {% endfor %}
+  <br />
+  <button class="py-3 w-1/2 bg-red-600 text-white rounded-lg mb-12" type="submit">Change Password</button>
+</form>
+{% endblock %}
