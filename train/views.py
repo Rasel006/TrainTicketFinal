@@ -1,10 +1,13 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import FormView
 from .forms import AddTrainForm,TrainInfoUpdateForm
 from django.urls import reverse_lazy
 from .models import Train_list
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
+from account.models import UserAccount
+from .models import BorrowedTicket
+from django.contrib import messages
 
 # Create your views here.
 class Add_trainView(FormView):
@@ -35,36 +38,57 @@ class Detail_train(DetailView):
     template_name= 'train/detail_train.html'
     context_object_name = 'train'
 
-    # def post(self, req, *args, **kwargs):
-    #     train = self.get_object()
-    #     return self.get(req, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         train = self.get_object()
         stations = train.station.all()
-
+        seat_formations = train.seat_formation.all()
+        seat_rows = []
+        # print(train)
         
+
+        for seat_form in seat_formations:
+            seat_list = seat_form.name.split()
+            # rows = [seat_list[i:i+2] for i in range(0, len(seat_list),2)]
+            seat_rows.append(seat_list)
+
         if train.seat_number: 
             seat_numbers = train.seat_number.split(",") 
+            print(seat_numbers)
         else:
-            seat_numbers = []
-
-        prices = []  # Initialize prices list
-
-        # Assuming 'price' is a DecimalField in the Train model
-        # You need to handle DecimalField differently than splitting a string
-        if train.price:
-            prices.append(train.price)  # Add price to the prices list
-        else:
-            prices = []
-
-        context['stations'] = stations
+            seat_numbers=[]
+        
+        context['stations'] = stations 
         context['seat_numbers'] = seat_numbers
-        context['prices'] = prices
-
+        context['seat_rows'] = seat_rows
         return context
-    
+
+@login_required
+def buyTicket(req, train_id):
+    train = Train_list.objects.filter(id=train_id).first()
+    user_acc = get_object_or_404(UserAccount, user=req.user)
+    acc_balance = user_acc.balance
+    ticketPrice = train.price
+
+    if acc_balance >= ticketPrice:
+        acc_balance -= ticketPrice
+        user_acc.balance = acc_balance
+        user_acc.save()
+
+        profile, created= BorrowedTicket.objects.get_or_create(user=req.user, train = train)
+        messages.success(req,"Great, Ticket Purchased Successfully")
+        print(profile)
+
+    # else:
+    #     print("not working")
+    #     messages.error(req,"Balance not sufficient")
+    else:
+        print("not eror")
+        messages.error(req,"Your Balance is not sufficient.")
+        redirect("deposite")
+
+    return redirect("dashboard")
+
 
 def editTrainInfo(req,id):
     train = Train_list.objects.filter(pk=id).first()
