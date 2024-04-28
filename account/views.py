@@ -6,6 +6,8 @@ from django.contrib.auth import login,logout,update_session_auth_hash
 from django.contrib.auth.views import LoginView
 from . import forms
 from django.contrib.auth.forms import SetPasswordForm
+from .models import UserAccount
+from django.contrib import messages
 
 
 # Create your views here.
@@ -19,6 +21,11 @@ class UserReg(FormView):
         login(self.request, user)
         # print(form.cleaned_data)
         return super().form_valid(form)
+    
+    # def form_invalid(self, form):
+    #     form.add_error(None, "NID is not unique")
+    #     return super().form_invalid(form)
+
     
 
 class UserLoginView(LoginView):
@@ -45,8 +52,8 @@ def editProfile(req):
     return render(req, 'account/profile.html', {'form': edit_form})
 
 def profileInfo(req):
-    return render(req, 'account/profileInfo.html')
-    
+    user_acc = UserAccount.objects.filter(user=req.user)
+    return render(req, 'account/profileInfo.html', {'user_acc':user_acc})
 
 def pass_change2(request):
     if request.user.is_authenticated:
