@@ -2,28 +2,27 @@
 <nav class="px-12 py-6 shadow-lg">
     <div class="flex items-center justify-between">
         <div class="flex items-center">
-            <a href="/"><img class="h-8 w-full" src="{% static './img/logo6.png' %}" alt=""></a>
-            </div>
+            <img class="w-12 h-16 mr-3" src="{% static 'img/logo.jpg' %}" alt="">
+            <h1>Train Ticket System</h1></div>
         <div>
             <ul class="flex">
-                <li class="mr-6"><a href="{% url 'home' %}" style="color: #5AE4A8;">Home</a></li>
-                <li class="mr-6"><a href="{% url 'deposite' %}" style="color: #5AE4A8;">Deposite</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'home' %}">Home</a></li>
                 {% if request.user.is_staff %}
-                <li class="mr-6">
-                    <a href="{% url 'add_train' %}" style="color: #5AE4A8;">Add Train</a>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400">
+                    <a href="{% url 'add_train' %}">Add Train</a>
                 </li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                <span class="text-green-600">{{request.user.username}}(balance: {% if request.user.account.balance == 0 %}
-                    <span>00</span>
-                    {% else %}
-                    {{request.user.account.balance}}
-                    {% endif %})</span>
-                <li class="mr-6"><a href="{% url 'info' %}" style="color: #5AE4A8;">Profile</a></li>
-                <li class="mr-6"><a href="{% url 'logout' %}" style="color: #5AE4A8;">Logout</a></li>
+                
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'deposite' %}">Deposite</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'info' %}">Profile</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li class="mr-6"><a href="{% url 'login' %}" style="color: #5AE4A8;">Login</a></li>
-                <li class="mr-6"><a href='{% url 'register' %}' style="color: #5AE4A8;">Register</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'login' %}">Login</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href='{% url 'register' %}'>Register</a></li>
                 {% endif %}
             </ul>
         </div>

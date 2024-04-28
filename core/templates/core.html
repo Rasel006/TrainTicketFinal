@@ -1,0 +1,36 @@
+<div class="w-1/3 shadow-lg p-5">
+    <ul>
+      <li class="my-4 hover:bg-gray-200 py-3 px-2 rounded-lg">
+        <div class="flex">
+          <img
+            class="w-6 h-6 mr-2"
+            src="https://www.svgrepo.com/show/507260/dashboard.svg"
+            alt=""
+          />
+          <a href="{% url 'dashboard' %}"><button>Dashboard</button></a>
+        </div>
+      </li>
+      {% if request.user.is_staff %}
+      <li class="my-4 hover:bg-gray-200 py-3 px-2 rounded-lg">
+        <div class="flex">
+          <img
+            class="w-6 h-6 mr-2"
+            src="https://www.svgrepo.com/show/507443/users.svg"
+            alt=""
+          />
+          <a href="{% url 'users' %}"><button>All users</button></a>
+        </div>
+      </li>
+      <li class="my-4 hover:bg-gray-200 py-3 px-2 rounded-lg">
+        <div class="flex">
+          <img
+            class="w-6 h-6 mr-2"
+            src="https://www.svgrepo.com/show/447512/tickets-alt.svg"
+            alt=""
+          />
+          <a href="{% url 'borrowed' %}"><button>Borrowed Tickets</button></a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
