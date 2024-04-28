@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="flex h-screen">
+  {% include 'core.html' %}
+  <div class="w-full">
+    <h1 class="text-3xl text-center font-bold my-10">Borrowed Tickets</h1>
+
+    {% if borroweds %} 
+    <table class="w-full bg-white border border-gray-300">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b text-left bg-gray-200">ID</th>
+            <th class="py-2 px-4 border-b text-left bg-gray-200">Buyer</th>
+            <th class="py-2 px-4 border-b text-left bg-gray-200">UserAccount</th>
+            <th class="py-2 px-4 border-b text-left bg-gray-200">Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for borrow in borroweds %}
+          <tr class="bg-gray-100">
+            <td class="py-2 px-4 border-b">{{ borrow.id }}</td>
+            <td class="py-2 px-4 border-b">{{ borrow.user.username }}</td>
+            <td class="py-2 px-4 border-b">{{ borrow.user_acc }}</td>
+            <td class="py-2 px-4 border-b">
+                <a href="" class="text-white">
+                  <button
+                  class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+                  Cancel Ticket 
+                </button>
+                </a>
+              
+            </td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+    {% else %}
+    <p class="text-xl text-center mt-12 mb-12 md:mb-80">
+      No Users Loaded
+    </p>
+
+    {% endif %}
+
+
+  </div>
+</div>
+
+{% endblock %}

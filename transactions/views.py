@@ -7,7 +7,7 @@ from .forms import DepositForm
 
 # Create your views here.
 class TransactionCreateMix(LoginRequiredMixin, CreateView):
-    template_name = 'transactions/transaction_form.html'
+    template_name = 'transaction/transaction_form.html'
     model = Transaction
     title = ''
     success_url = reverse_lazy('home')
@@ -28,7 +28,7 @@ class TransactionCreateMix(LoginRequiredMixin, CreateView):
     
 class DepositeView(TransactionCreateMix):
     form_class = DepositForm
-    title ="Deposite"
+    title ="Get Started To Buy Ticket"
 
     def form_valid(self, form):
         amount = form.cleaned_data.get('amount')

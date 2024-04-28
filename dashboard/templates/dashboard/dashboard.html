@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="flex h-screen">
+  {% include 'core.html' %}
+  <div class="w-full">
+    <h1 class="text-3xl text-center font-bold mt-10">Dashboard</h1>
+    {% if ticket %} {% for info in ticket %}
+    <div class="my-12 mx-12 w-1/2 mx-auto">
+      <p class="text-2xl text-yellow-500">{{ info.train.name }}</p>
+      <div class="bg-green-600 w-16 h-1 mb-6"></div>
+      <div class="flex justify-between mb-3">
+        <p class="">Time: {{ info.train.time }}</p>
+        <p>Price: {{ info.train.price }}</p>
+      </div>
+      <div class="flex justify-between mb-3">
+        <p>
+          Departure: {% for infoDep in info.train.station.all %}
+          {{infoDep.name}} {% endfor %}
+        </p>
+        <p>Destination: {{ info.train.destination }}</p>
+      </div>
+      <div class="text-center">
+        <button class="bg-red-600 rounded-lg px-4 py-2 text-white">
+          Cancel Ticket
+        </button>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p class="text-xl text-center mt-12 mb-12 md:mb-80">
+      No Tickets Borrowed Yet
+    </p>
+
+    {% endif %}
+  </div>
+</div>
+
+{% endblock content %}
