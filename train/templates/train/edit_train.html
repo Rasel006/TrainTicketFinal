@@ -80,6 +80,19 @@
         </div>
         <div>
             <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.station.id_for_label }}">
+                    {{ form.station.label }}
+                </label>
+                {{ form.station }}
+                {% if form.station.errors %}
+                {% for error in form.station.errors %}
+                <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <div class="w-full px-3 mb-6">
                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.destination.id_for_label }}">
                     {{ form.destination.label }}
                 </label>

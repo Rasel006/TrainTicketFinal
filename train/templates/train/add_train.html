@@ -20,6 +20,15 @@
     box-sizing: border-box;
     transition: border-color 0.3s ease;
   }
+  input[type="number"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
   select {
     padding: 12px;
     border: 1px solid #ccc;
@@ -120,13 +129,39 @@
                 {% endif %}
             </div>
         </div>
+        <div>
+            <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.price.id_for_label }}">
+                    {{ form.price.label }}
+                </label>
+                {{ form.price }}
+                {% if form.price.errors %}
+                {% for error in form.price.errors %}
+                <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.price.id_for_label }}">
+                    {{ form.seat_formation.label }}
+                </label>
+                {{ form.seat_formation }}
+                {% if form.seat_formation.errors %}
+                {% for error in form.seat_formation.errors %}
+                <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
         
         {% for hidden_field in form.hidden_fields %}
         {{ hidden_field.errors }}
         {{ hidden_field }}
         {% endfor %}
         <div class="text-center mt-6">
-            <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" type="submit">Add Train</button>
+            <button class="bg-green-600 rounded-lg w-56 py-3 text-white font-extrabold" type="submit">Add Train</button>
         </div>
     </form>
   </div>
