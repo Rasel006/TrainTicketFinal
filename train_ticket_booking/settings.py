@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+CSRF_TRUSTED_ORIGINS = ['', 'https://*.127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'account',
     'core',
     'train',
-    'transactions',
+    'transaction',
+    'dashboard',
+
     'django_browser_reload',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+   'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
