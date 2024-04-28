@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% if form.non_field_errors %} 
+{%for error in form.non_field_errors %} 
+{{request.user}}
+<div class="bg-red-200 border border-red-400 text-red-400 px-4 py-3">
+  <p class="font-bold">Error!</p>
+  <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} 
+{% endif %}
+
+<!-- {% if form.errors %}
+    <ul>
+        {% for error in form.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %} -->
+
 <style>
     input[type="text"] {
     padding: 10px;
@@ -40,94 +58,111 @@
 }
 </style>
 
-<h1 class="text-3xl text-center mt-12 text-[#5AE4A8]">Register Now</h1>
-<div class="px-1 py-0.5 bg-[#5AE4A8] w-20 mx-auto mb-5"></div>
-
-
-
-<div class="mb-10 flex justify-between items-center">
-    <div class="mx-auto">
-        <img src="https://img.freepik.com/free-vector/account-concept-illustration_114360-399.jpg?w=740&t=st=1710178635~exp=1710179235~hmac=3cc555d06a03bbb32adb1466361c240c6f7daa22cd3042d7a2e130aea90a5cd5" alt="#">
-    </div>
-    <div class="mx-auto">
-        <form method="post" class="shadow-md rounded-lg px-8 pt-8 pb-8 mb-4">
-            {% csrf_token %}
-            {% for hidden_field in form.hidden_fields %} 
-            {{ hidden_field.errors }} 
-            {{ hidden_field }} 
-            {% endfor %}
-
-            <div class="mb-6">
-                <div class="w-full px-3 mb-3">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                    {{ form.username }}
-                    {% if form.username.errors %}
-                    {% for error in form.username.errors %}
-                    <p class="text-red-600 text-sm pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+<div class="h-full w-full">
+    <div class="block md:flex justify-center items-center">
+        <div class="w-full h-full md:w-1/2">
+            <img class="" src="https://img.freepik.com/premium-vector/vector-illustration-register-now-speech-bubble-label_180786-180.jpg" alt="#">
+        </div>
+        <div class="w-full md:w-1/2">
+            <p class="text-sm text-nowrap md:text-xl font-bold ml-6 md:ml-16 text-violet-600 my-6 md:my-12">
+                Train Ticket System Registration
+              </p>
+              <h1 class="text-2xl md:text-3xl text-gray-700 font-bold ml-6 md:ml-16 mt-6 md:mt-12">
+                SIGN UP
+              </h1>
+              <p class="text-xs md:text-sm text-nowrap text-gray-700 font-bold ml-6 md:ml-16">
+                Sign up To Enter a New World
+              </p>
+            <form method="post" class="px-6 md:px-16 py-8 md:py-16">
+                {% csrf_token %}
+                {% for hidden_field in form.hidden_fields %} 
+                {{ hidden_field.errors }} 
+                {{ hidden_field }} 
+                {% endfor %}
+    
+                <div class="mb-6">
+                    <div class="w-full px-3 mb-3">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <div class="mb-6">
-                <div class="w-full px-3 mb-3">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.nid.id_for_label }}">{{ form.nid.label }}</label>
-                    {{ form.nid }}
-                    {% if form.nid.errors %}
-                    {% for error in form.nid.errors %}
-                    <p class="text-red-600 text-sm pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+                <div class="mb-6">
+                    <div class="w-full px-3 mb-3">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="{{ form.nid.id_for_label }}">{{ form.nid.label }}</label>
+                        {{ form.nid }}
+                        
+                        {% if form.nid.errors %}
+                        {% for error in form.nid.errors %}
+                        <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <div class="w-full px-3 mb-6">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">
-                        {{ form.email.label }}
-                    </label>
-                    {{ form.email }}
-                    {% if form.email.errors %}
-                    {% for error in form.email.errors %}
-                    <p class="text-red-600 text-sm pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+    
+                <div>
+                    <div class="w-full px-3 mb-6">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">
+                            {{ form.email.label }}
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                        <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="w-full px-3 mb-6">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.password1.id_for_label }}">
-                        {{ form.password1.label }}
-                    </label>
-                    {{ form.password1 }}
-                    {% if form.password1.errors %}
-                    {% for error in form.password1.errors %}
-                    <p class="text-red-600 text-sm pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+                <div>
+                    <div class="w-full px-3 mb-6">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="{{ form.password1.id_for_label }}">
+                            {{ form.password1.label }}
+                        </label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                        <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="w-full px-3 mb-6">
-                    <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="{{ form.password2.id_for_label }}">
-                        {{ form.password2.label }}
-                    </label>
-                    {{ form.password2 }}
-                    {% if form.password2.errors %}
-                    {% for error in form.password2.errors %}
-                    <p class="text-red-600 text-sm pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+                <div>
+                    <div class="w-full px-3 mb-6">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="{{ form.password2.id_for_label }}">
+                            {{ form.password2.label }}
+                        </label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                        <p class="text-red-600 text-sm pb-2">{{ error }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field.errors }}
-            {{ hidden_field }}
-            {% endfor %}
-            <div class="text-center mt-6">
-                <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;" type="submit">Sign Up</button>
-            </div>
-        </form>
+                {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+                {{ hidden_field }}
+                {% endfor %}
+                <div class="text-center mt-6">
+                    <button class="bg-gray-600 text-white  w-full py-3 cursor-pointer rounded-lg font-bold" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <p class="ml-16 pb-12">
+                Have account?
+                <a href="{% url 'login' %}">
+                  <span class="underline">
+                    Login Here
+                  </span>
+                </a>
+              </p>
+        </div>
     </div>
 </div>
+
+
 
 {% endblock %}

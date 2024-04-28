@@ -1,26 +1,45 @@
-{% extends "base.html" %} 
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1 class="text-3xl text-center font-bold mt-10">Profile Information</h1>
 
-<div class="w-1/2 p-12 mx-auto mb-10">
-  <p class="text-2xl font-bold">NID: {{request.user.account.nid}}</p>
-  <p class="text-xl mt-3">Username: {{request.user.username}}</p>
-  <p class="text-xl mt-3">Email: {{request.user.email}}</p>
-  <div class="mt-5">
-    <a href="{% url 'profile' %}"
-      ><button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">
-        Edit profile
-      </button></a
-    >
+<div class="flex justify-between items-center mx-12">
+  <div class="w-1/2">
+    <img class=" border-2 border-green-400 rounded-full w-64 h-64 mx-auto" src="" alt="profile picture here">
   </div>
-  <div class="mt-5">
-    <a href="{% url 'pass_change' %}">
-        <button class="bg-red-600 w-1/2 py-2 text-white rounded-lg">
-            Change Password
-          </button>
-    </a>
+  <div class="w-1/2 p-12 mb-10">
+    <p class="text-2xl font-bold">
+      Balance: {% for user_bank in user_acc %} {{user_bank.balance}} 
+      
+      {% if user_bank.balance == 0 %}
+        (
+          <a href="{% url 'deposite' %}">
+            <button class="text-sm px-3 py-2 rounded-lg underline">Deposite Here</button>
+          </a>
+        )
+      {% endif %}
+
+      {% endfor %}
+    </p>
     
+    <p class="text-2xl font-medium mt-3">NID: {{request.user.account.nid}}</p>
+
+    <p class="text-xl mt-3">Username: {{request.user.username}}</p>
+    <p class="text-xl mt-3">Email: {{request.user.email}}</p>
+    
+    <div class="mt-5">
+      <a href="{% url 'profile' %}"
+        ><button class="bg-green-600 w-1/2 py-2 text-white rounded-lg">
+          Edit profile
+        </button></a
+      >
+    </div>
+    <div class="mt-5">
+      <a href="{% url 'pass_change' %}">
+        <button class="bg-red-600 w-1/2 py-2 text-white rounded-lg">
+          Change Password
+        </button>
+      </a>
+    </div>
   </div>
 </div>
 
