@@ -7,18 +7,34 @@ TIME_SLOT=(
     ('12:00 PM', '12:00 PM'),
     ('3:00 PM', '3:00 PM'),
     ('8:00 PM', '8:00 PM'),
+    ('9:00 PM', '9:00 PM'),
+    ('11:00 PM', '11:00 PM'),
+    ('7:30 PM', '7:30 PM'),
+    ('7:00 AM', '7:00 AM'),
+    ('8:00 AM', '8:00 AM'),
+    ('5:00 PM', '5:00 PM'),
+
 )
 
 DESTINATION=(
     ('Sylhet','Sylhet'),
-    ('Sunamganj','Sunamganj'),
-    ('Dhaka','Dhaka'),
-    ('Chittagong','Chittagong'),
+    ('Kamlapur','Kamlapur'),
+    ('BimanBandar','BimanBandar'),
+    ('Chattagram','Chattagram'),
+    ('CoxsBazar','CoxsBazar'),
+    ('Tangail','Tangail'),
+    ('Narshingdi','Narshingdi'),
+    ('Rajshahi','Rajshahi'),
+    ('Joydevpur','Joydevpur'),
+     ('Sirajganj','Sirajganj'),
+
 )
 
 SEAT_TYPE=(
     ('AC', 'AC'),
     ('NON-AC', 'NON-AC'),
+    ('Snighdha','Snighdha'),
+    ('S_Chair','S_Chair'),
 )
 
 SEAT_NO=(

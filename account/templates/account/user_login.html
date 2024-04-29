@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load static %} 
 {% block content %} 
 {% if form.non_field_errors %} 
 {%for error in form.non_field_errors %} 
@@ -35,20 +36,17 @@
 <div class="w-full h-screen block md:flex">
   <div class="w-full md:w-1/2 h-48 md:h-full">
     <img class="w-full h-full object-cover"
-      src="https://media.istockphoto.com/id/1614567426/photo/man-hands-hold-and-touch-tablet-pc-with-login-box-travel-concept.jpg?b=1&s=170667a&w=0&k=20&c=e-gpTgHZKfbBA9mAbrwMBPlWgN-AjPsOkL63Hb0gAjM="
+      src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7893.jpg?w=740&t=st=1714379601~exp=1714380201~hmac=dfbf985392b986383d112ea1927dd34fd2e442d96029649936c48d4380c5cb90"
       alt="#"
     />
   </div>
   <div class="w-full md:w-1/2">
     <h1 class="text-sm text-nowrap md:text-xl font-bold ml-6 md:ml-16 text-violet-600 my-6 md:my-12">
-      Welcom To Train Ticket System
+      Welcom to our Brrailway Ticket Booking System
     </h1>
     <h1 class="text-2xl md:text-3xl text-gray-700 font-bold ml-6 md:ml-16 mt-6 md:mt-12">
       LOGIN
     </h1>
-    <p class="text-xs md:text-sm text-nowrap text-gray-700 font-bold ml-6 md:ml-16">
-      Train-ticket-system wants you to be Login
-    </p>
       <form
         method="post"
         class="mx-4 md:mx-14 py-6 md:py-16"
@@ -86,10 +84,10 @@
         </div>
       </form>
       <p class="ml-16">
-        New Here?
+        Are you new here?
         <a href="{% url 'register' %}">
           <span class="underline">
-            Signup here
+            Signup
           </span>
         </a>
       </p>

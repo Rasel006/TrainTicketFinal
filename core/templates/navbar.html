@@ -2,27 +2,28 @@
 <nav class="px-12 py-6 shadow-lg">
     <div class="flex items-center justify-between">
         <div class="flex items-center">
-            <img class="w-12 h-16 mr-3" src="{% static 'img/logo.jpg' %}" alt="">
-            <h1>Train Ticket System</h1></div>
+            <a href="/"><img class="h-8 w-full" src="{% static './img/logo6.png' %}" alt=""></a></div>
         <div>
             <ul class="flex">
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'home' %}">Home</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400"><a href= "{% url 'home' %}" class="text-green-400">Home</a></li>
                 {% if request.user.is_staff %}
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400">
-                    <a href="{% url 'add_train' %}">Add Train</a>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400">
+                    <a href="{% url 'add_train' %}"class="text-green-400">Add Train</a>
                 </li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                 
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'deposite' %}">Deposite</a></li>
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400">
-                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400"><a href="{% url 'deposite' %} "class="text-green-400"b>Deposite</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400">
+                    <a href="{% url 'dashboard' %}"class="text-green-400">Dashboard</a>
                 </li>
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'info' %}">Profile</a></li>
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400"><a href="{% url 'info' %}"class="text-green-400">Profile</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400"><a href="{% url 'logout' %}"class="text-green-400">Logout</a></li>
                 {% else %}
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href="{% url 'login' %}">Login</a></li>
-                <li class="mr-6 border-b-2 border-white hover:border-yellow-400"><a href='{% url 'register' %}'>Register</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400"><a href='{% url 'login' %}' class="text-green-400">Login</a></li>
+                <li class="mr-6 border-b-2 border-white hover:border-green-400">
+                    <a href='{% url 'register' %}' class="text-green-400">Register</a>
+                  </li>                  
                 {% endif %}
             </ul>
         </div>
