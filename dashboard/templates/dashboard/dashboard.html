@@ -1,37 +1,29 @@
-{% extends "base.html" %} {% block content %}
-
-<div class="flex h-screen">
+{% extends "base.html" %} 
+{% block content %}
+<div class="mx-20 my-2">
   {% include 'core.html' %}
-  <div class="w-full">
+  <div class="w-full overflow-y-auto max-h-screen"> <!-- Added max-h-screen and overflow-y-auto -->
     <h1 class="text-3xl text-center font-bold mt-10">Dashboard</h1>
-    {% if ticket %} {% for info in ticket %}
-    <div class="my-12 mx-12 w-1/2 mx-auto">
-      <p class="text-2xl text-yellow-500">{{ info.train.name }}</p>
-      <div class="bg-green-600 w-16 h-1 mb-6"></div>
-      <div class="flex justify-between mb-3">
-        <p class="">Time: {{ info.train.time }}</p>
-        <p>Price: {{ info.train.price }}</p>
-      </div>
-      <div class="flex justify-between mb-3">
-        <p>
-          Departure: {% for infoDep in info.train.station.all %}
-          {{infoDep.name}} {% endfor %}
-        </p>
-        <p>Destination: {{ info.train.destination }}</p>
-      </div>
-      <div class="text-center">
-        <button class="bg-red-600 rounded-lg px-4 py-2 text-white">
-          Cancel Ticket
-        </button>
-      </div>
-    </div>
-    {% endfor %} {% else %}
-    <p class="text-xl text-center mt-12 mb-12 md:mb-80">
-      No Tickets Borrowed Yet
-    </p>
-
+    {% if ticket %}
+      {% for info in ticket %}
+        <div class="bg-yellow-50 mx-auto border-2 my-6 border-gray-200 rounded-lg mb-4"> <!-- Added mb-4 for margin bottom -->
+          <div class="my-12 mx-12 w-1/2 mx-auto">
+            <p class="text-2xl text-yellow-500">{{ info.train.name }}</p>
+            <div class="bg-green-600 w-16 h-1 mb-6"></div>
+            <div class="flex justify-between mb-3">
+              <p>Time: {{ info.train.time }}</p>
+              <p>Price: {{ info.train.price }}</p>
+            </div>
+            <div class="flex justify-between mb-3">
+              <p>Departure: {% for infoDep in info.train.station.all %} {{infoDep.name}} {% endfor %}</p>
+              <p>Destination: {{ info.train.destination }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-xl text-center mt-12 mb-12 md:mb-80">No Tickets Borrowed Yet</p>
     {% endif %}
   </div>
 </div>
-
 {% endblock content %}
